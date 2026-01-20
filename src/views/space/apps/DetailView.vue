@@ -14,16 +14,17 @@
         </header>
         <div class="flex flex-row h-[calc(100%-64px)]">
           <div class="flex-1 border-r border-gray-200 p-6 border">人设与回复逻辑</div>
-          <div class="flex-1 p-6 ">应用能力</div>
+          <div class="flex-1 p-6">应用能力</div>
         </div>
       </div>
       <!-- 右侧调试与预览 -->
-      <div class="flex flex-col w-1/3 bg-white h-full ">
+      <div class="flex flex-col w-1/3 bg-white h-full">
         <!-- 调试与预览 -->
         <header
-          class="flex items-center  flex-shrink-0 tems-center h-16 px-4 text-xl bg-white border-b border-gray-200 shadow-sm"
+          class="flex items-center flex-shrink-0 tems-center h-16 px-4 text-xl bg-white border-b border-gray-200 shadow-sm"
         >
-          调试与预览</header>
+          调试与预览
+        </header>
         <!-- 调试对话界面 -->
         <div class="h-full min-h-0 px-6 py-7 overflow-x-hidden overflow-y-scroll scollbar-w-none">
           <!-- 人类消息 -->
@@ -50,7 +51,9 @@
             </a-avatar>
 
             <div class="flex flex-col gap-2">
-              <div class="font-semibold text-gray-700 ">{{ message.role === 'human' ? 'VV' : '我是聊天机器人' }}</div>
+              <div class="font-semibold text-gray-700">
+                {{ message.role === 'human' ? 'VV' : '我是聊天机器人' }}
+              </div>
               <div
                 v-if="message.role === 'human'"
                 class="max-w-max bg-blue-700 text-white border border-blue-800 px-4 py-3 rounded-2xl"
@@ -64,7 +67,6 @@
                 {{ message.content }}
               </div>
             </div>
-
           </div>
           <!-- 没有任何消息时 -->
           <div
@@ -94,7 +96,7 @@
               <icon-apps />
             </a-avatar>
             <div class="flex flex-col gap-2">
-              <div class="font-semibold text-gray-700 ">ChatGPT聊天机器人</div>
+              <div class="font-semibold text-gray-700">ChatGPT聊天机器人</div>
               <div class="max-w-max bg-gray-100 text-gray-900 border border-gray-200 px-4 py-3 rounded-2xl">
                 <icon-loading />
               </div>
@@ -126,7 +128,7 @@
                 class="flex-1 outline-0"
                 v-model="query"
                 @keyup.enter="sendMessage"
-              >
+              />
               <a-button
                 type="text"
                 shape="circle"
@@ -153,7 +155,7 @@
             </div>
           </div>
           <!-- 底部提示文字 -->
-          <div class="text-center text-gray-500 text-xs py-4 ">
+          <div class="text-center text-gray-500 text-xs py-4">
             内容由AI生成，无法确保真实准确，仅供参考。
           </div>
         </div>
@@ -167,11 +169,10 @@ import { debugApp } from '@/service/app'
 import Message from '@arco-design/web-vue/es/message'
 import { ref } from 'vue'
 const query = ref('')
-const messages = ref<Array<{ role: string, content: string }>>([])
+const messages = ref<Array<{ role: string; content: string }>>([])
 const isLoading = ref(false)
 
 const clearMessages = () => {
-
   messages.value = []
 }
 const sendMessage = async () => {
@@ -192,12 +193,12 @@ const sendMessage = async () => {
 
     messages.value.push({
       role: 'human',
-      content: humanQuery
+      content: humanQuery,
     })
-    const response = await debugApp("sadas", humanQuery)
+    const response = await debugApp('sadas', humanQuery)
     messages.value.push({
       role: 'ai',
-      content: response.data.content
+      content: response.data.content,
     })
   } catch (error) {
     Message.error((error as Error).message || '请求失败')
